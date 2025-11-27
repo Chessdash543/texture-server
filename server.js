@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const path = require("path");
-const multer = require("multer");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
