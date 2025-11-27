@@ -16,7 +16,7 @@ const adminUser = "CHESSDASH543";
 const adminPass = "8D9WJ49FKAS0WIE01K-QWJEFOI3J";
 
 // Caminho do arquivo JSON
-const packsFilePath = path.join(__dirname, "public", "data.json");
+const packsFilePath = path.join(__dirname, "data", "data.json");
 
 // Middleware de autenticação
 function auth(req, res, next) {
