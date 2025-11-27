@@ -33,7 +33,7 @@
         const cardsPerPage = 6;
         let texturePacks = [];
 
-        fetch("/api/data")
+        fetch("/api/data.json")
             .then(res => res.json())
             .then(data => {
                 texturePacks = data;
@@ -92,7 +92,6 @@
 
             if (totalPages <= 1) return;
 
-            // Botão anterior
             const prev = document.createElement("button");
             prev.textContent = "◀";
             prev.disabled = currentPage === 1;
@@ -154,6 +153,7 @@
                         <p>Version: ${pack.version}</p>
                         <p>ID: ${pack.id}</p>
                         <p>Download: <a href="${pack.download}" target="_blank">Click here to download</a></p>
+                        <p>Downloads: ${pack.downloads}</p>
                         <button id="closePopup">Close</button>
                     </div>
                     <img src="${pack.icon}" alt="Icon" class="pack-icon">
