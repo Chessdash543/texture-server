@@ -15,19 +15,6 @@ const passwordPath = path.join(__dirname, "data", "password.json");
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-// Configuração do Multer para uploads (opcional)
-const upload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-            if (file.fieldname === "icon") cb(null, "public/uploads/icons");
-            else cb(null, "public/uploads/screenshots");
-        },
-        filename: (req, file, cb) => {
-            cb(null, Date.now() + "-" + file.originalname);
-        }
-    })
-});
-
 // Rota admin
 app.get("/admin.html", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "admin.html"));
