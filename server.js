@@ -29,27 +29,6 @@ app.get("/api/packs", (req, res) => {
     }
 });
 
-// Adicionar pack (verifica senha)
-app.post("/api/packs", (req, res) => {
-    const { password, ...pack } = req.body;
-
-    // Lê a senha do arquivo
-    const file = JSON.parse(fs.readFileSync(passwordPath, "utf8"));
-    const realPass = file.password;
-
-    if (!password) return res.status(401).json({ error: "Senha necessária." });
-    if (password !== realPass) return res.status(401).json({ error: "Senha incorreta." });
-
-    try {
-        const packs = JSON.parse(fs.readFileSync(packsFilePath));
-        packs.push(pack);
-        fs.writeFileSync(packsFilePath, JSON.stringify(packs, null, 2));
-        res.json({ success: true });
-    } catch (err) {
-        res.status(500).json({ error: "Erro ao salvar pack." });
-    }
-});
-
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
