@@ -9,6 +9,25 @@ body {
     padding: 20px;
 }
 
+/* Download link styles */
+
+a {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffaa00;
+}
+
+a:visited {
+    color: #aa00ff;
+}
+
+a:active {
+    color: #ff0000;
+}
+
 body {
     background-image: url('/img/bg.png'); /* caminho da imagem */
     background-size: cover;     /* cobre toda a tela */
@@ -128,7 +147,6 @@ input:hover, select:hover, button:hover {
     align-items: center;         /* centraliza vertical */
     width: fit-content;          /* mantém o tamanho certinho */
 }
-
 
 .card-content .download-btn:hover {
     background-color: #333;
