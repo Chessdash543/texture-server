@@ -21,18 +21,21 @@ body {
     width: 500px; /* aumenta no eixo X para 400px */
     max-width: 80%; /* não ultrapassa 80% da tela */
     min-width: 150px; /* não fica menor que 150px */
-    padding: 5px 10px;
+    padding: 20px 30px;
     font-size: 16px;
     box-sizing: border-box; /* inclui padding na largura */
 }
 
+.title {
+    width: 1000px;
+    height: auto;
+    display: block;
+    margin: 0 auto 50px auto;
 
-h1.title {
-    color: #fff;
-    font-size: 36px;
-    margin-bottom: 20px;
-    text-align: center;
+    /* brilho suave */
+    filter: drop-shadow(0 0 12px #ffffffab);
 }
+
 
 .top-bar {
     display: flex;
@@ -294,10 +297,9 @@ input:hover, select:hover, button:hover {
         padding: 8px;
     }
 
-    select, button {
-        width: 100%;
-        font-size: 14px;
-        padding: 8px;
+    button, input, select {
+        padding: 20px 25px;
+        font-size: 20px;
     }
 
     /* --- CARDS --- */
