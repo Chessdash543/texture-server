@@ -65,7 +65,7 @@
                         <div class="card-content">
                             <h3>${pack.name}</h3>
                             <p>${pack.description}</p>
-                            <button class="download-btn">Download</button>
+                            <a class="download-btn" href="${pack.download}" download>Download</a>
                         </div>
                         <button class="more-info">i</button>
                     </div>
@@ -73,10 +73,6 @@
                 `;
 
                 cardsContainer.appendChild(card);
-
-                card.querySelector(".download-btn").addEventListener("click", async () => {
-                    window.open(pack.download, "_blank");
-                });
 
                 card.querySelector(".more-info").addEventListener("click", () => openPopup(pack));
             });

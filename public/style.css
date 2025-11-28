@@ -115,17 +115,22 @@ input:hover, select:hover, button:hover {
     font-size: 20px;
 }
 
-.card-content button {
+.card-content .download-btn {
     padding: 8px 15px;
     border-radius: 25px;
-    border: none;
     background-color: #646464;
     color: #fff;
     cursor: pointer;
     transition: transform 0.2s, background-color 0.2s;
+    text-decoration: none;
+    display: flex;               /* centraliza */
+    justify-content: center;     /* centraliza horizontal */
+    align-items: center;         /* centraliza vertical */
+    width: fit-content;          /* mantém o tamanho certinho */
 }
 
-.card-content button:hover {
+
+.card-content .download-btn:hover {
     background-color: #333;
     transform: scale(1.05);
 }

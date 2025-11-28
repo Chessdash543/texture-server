@@ -7,10 +7,10 @@
       "high",
       "medium"
     ],
-    "download": "https://tws.m336.dev/api/v1/tws/getPack/118.zip",
+    "download": "/uploads/chessdash.diamondtp/chessdash543.diamondtp.zip",
     "description": "Remake of Diamond TP...",
     "version": "v4.0.7",
-    "icon": "https://i.imgur.com/CZty6T6.png",
-    "screenshot": "https://i.imgur.com/rWGBKKL.png"
+    "icon": "/uploads/chessdash.diamondtp/icon.png",
+    "screenshot": "/uploads/chessdash.diamondtp/image.png"
   }
 ]
