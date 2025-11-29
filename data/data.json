@@ -27,5 +27,20 @@
     "version": "v1.6.0",
     "icon": "/uploads/danzgame.nova_ui/icon.png",
     "screenshot": "/uploads/danzgame.nova_ui/image.png"
+  },
+  {
+    "id":"martymcforty.cloudyceramics",
+    "name":"Cloudy Ceramics",
+    "creator":"MartyMCForty",
+    "resolution":[
+      "low",
+      "medium",
+      "high"
+    ],
+    "download":"/uploads/martymcforty.cloudyceramics/martymcforty.cloudyceramics.zip",
+    "description":"A mix with all the icons with other people's texture packs (Supernova Texture Pack, 1000 Icon Private Mix, etc.). This texture pack also has music, fonts, sfx from mobile games (Cut the Rope, Pou, etc.)\nFor people who use the More Icons mod in order to see the existing icons that are replaced by the texture pack, do the following: Go to Geode --> More Icons --> Mod settings --> Load From Traditional Packs: Off",
+    "version":"v1.0.0",
+    "icon":"/uploads/martymcforty.cloudyceramics/icon.png",
+    "screenshot":"/uploads/martymcforty.cloudyceramics/image.png"
   }
 ]

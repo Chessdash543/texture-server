@@ -66,11 +66,12 @@
                     <div class="card-top">
                         <img src="${pack.icon}" alt="Icon" class="card-icon">
                         <div class="card-content">
-                            <h3>${pack.name}</h3>
+                            <h3>${pack.name} by ${pack.creator}</h3>
                             <p>${pack.description}</p>
                             <a class="download-btn" href="${pack.download}" download>Download</a>
                         </div>
-                        <button class="more-info">i</button>
+                        <button class="more-info">i
+                        </button>
                     </div>
                     <img src="${pack.screenshot}" alt="screenshot" class="card-screenshot">
                 `;
@@ -133,6 +134,7 @@
                 <div class="popup-top">
                     <div class="popup-info">
                         <h2>${pack.name}</h2>
+                        <p>Texture Name: ${pack.name}</p>
                         <p>Creator: ${pack.creator}</p>
                         <p>Resolution: ${pack.resolution}</p>
                         <p>Description: ${pack.description}</p>
@@ -141,7 +143,6 @@
                         <p>Download: <a href="${pack.download}" target="_blank">Click here to download</a></p>
                         <button id="closePopup">Close</button>
                     </div>
-                    <img src="${pack.icon}" alt="Icon" class="pack-icon">
                 </div>
                 <img src="${pack.screenshot}" alt="screenshot" class="popup-image">
             `;

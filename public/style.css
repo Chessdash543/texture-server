@@ -80,6 +80,7 @@ input {
 input, select, button {
     background-color: #494949;
     color: #fff;
+    border: 2px solid #ffffff86;
 }
 
 input::placeholder {
@@ -159,21 +160,35 @@ select:hover, button:hover {
 
 .card-top .more-info {
     position: absolute;
-    top: 10px;     /* distancia do topo */
-    right: 10px;   /* distancia da direita */
-    width: 30px;
-    height: 30px;
+    top: 15px;               /* distância do topo */
+    right: 15px;             /* distância da direita */
+    
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    
     border-radius: 50%;
     background-color: #646464;
-    border: 2px solid #fff; /* borda opcional */
+    border: 2px solid #fff;
+    
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    color: #fff;
+    font-size: 20px;
     font-weight: bold;
-    font-size: 18px;
-    color: #ffffff;
+
+    overflow: hidden;        /* importante para imagem circular */
     z-index: 10;
+}
+
+.card-top .more-info img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    pointer-events: none;    /* evita clique na imagem ao invés do botão */
 }
 
 
@@ -273,7 +288,8 @@ select:hover, button:hover {
     margin: 10px auto;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
+    top: 20px;
 }
 
 .popup-top {
@@ -286,6 +302,21 @@ select:hover, button:hover {
 .popup-info {
     text-align: left;
     flex: 1;
+    border: 2px solid #ffffff;   /* borda do subbloco */
+    box-shadow: 0 0 10px #ffffff88; /* leve brilho */
+    gap: 10px;
+    background-color: #1a1a1a; /* fundo do subbloco */
+    padding: 15px;            /* espaço interno */
+    border-radius: 10px; 
+}
+
+.popup-info p {
+    font-size: 20px;
+}
+
+.popup-info h2 {
+    margin-top: 0;
+    font-size: 30px;
 }
 
 .popup-top .pack-icon {
@@ -299,7 +330,7 @@ select:hover, button:hover {
     margin: 0;
     font-size: 16px;
     line-height: 1.5;  /* espaço entre linhas */
-    color: #ddd;       /* opcional: deixa o texto levemente cinza */
+    color: #ddd;
 }
 
 /* RESPONSIVIDADE REAL PARA CELULAR */
