@@ -124,6 +124,8 @@ select:hover, button:hover {
     object-fit: cover;
     border-radius: 10px;
     flex-shrink: 0;
+    filter: drop-shadow(0 0 12px #ffffffab);
+    margin: 7px;
 }
 
 .card-content {
@@ -148,7 +150,7 @@ select:hover, button:hover {
     display: flex;               /* centraliza */
     justify-content: center;     /* centraliza horizontal */
     align-items: center;         /* centraliza vertical */
-    width: fit-content;          /* mantém o tamanho certinho */
+    width: fill;          /* mantém o tamanho certinho */
 }
 .card-content p {
     font-size: 20px;
