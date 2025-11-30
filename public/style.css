@@ -124,7 +124,7 @@ select:hover, button:hover {
     object-fit: cover;
     border-radius: 10px;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 12px #ffffffab);
+    filter: drop-shadow(0 0 12px #ffffffc5);
     margin: 7px;
 }
 
@@ -203,6 +203,8 @@ select:hover, button:hover {
     height: auto;
     border-radius: 10px;
     object-fit: cover;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 20px #ffffff;
 }
 
 .description-card {
@@ -236,6 +238,7 @@ select:hover, button:hover {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     overflow-y: auto;
 }
+
 .popup-box button {
     margin-top: 15px;
     padding: 10px 20px;
@@ -338,7 +341,6 @@ select:hover, button:hover {
     color: #ddd;
 }
 
-/* RESPONSIVIDADE REAL PARA CELULAR */
 @media (max-width: 600px) {
 
     body {
