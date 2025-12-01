@@ -5,6 +5,7 @@ const path = require("path");
 const multer = require("multer");
 const jwt = require("jsonwebtoken");
 const archiver = require("archiver");
+const bcrypt = require('bcryptjs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,24 +15,53 @@ const packsFilePath = path.join(__dirname, "data", "data.json");
 const passwordPath = path.join(__dirname, "data", "password.json");
 
 // Secret para JWT (gera automaticamente se não existir)
-const JWT_SECRET = process.env.JWT_SECRET || "seu-secret-jwt-super-seguro-mude-isso";
+const JWT_SECRET = process.env.JWT_SECRET || "d594ee2ecd88d7ac7fe72d189614209f8fcb36b3f70c24224b4f46ee59c6abb937d546f9dd8f27f7e73b31f5a218eb2b";
 
 // Configura pasta pública e JSON
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static("public"));
 
-// Lê senha de autenticação
-let uploadPassword = "seu-senha-segura-aqui";
+let uploadPasswordHash = "$2b$10$gBVPx3RzcG0kKEw.Zf8edu57vR7W.2X2Wt6pEph8p3Ui1/i9xIBSO";
 try {
-       if (fs.existsSync(passwordPath)) {
-          const pwdData = JSON.parse(fs.readFileSync(passwordPath));
-          uploadPassword = process.env.UPLOAD_PASSWORD || pwdData.uploadPassword || uploadPassword;
-       } else {
-          console.warn("Aviso: password.json não encontrado, usando UPLOAD_PASSWORD (se definido) ou padrão.");
-       }
+    if (fs.existsSync(passwordPath)) {
+        const pwdData = JSON.parse(fs.readFileSync(passwordPath));
+        // Prefer explicit hash from env or file
+        if (process.env.UPLOAD_PASSWORD_HASH) {
+            uploadPasswordHash = process.env.UPLOAD_PASSWORD_HASH;
+        } else if (pwdData.uploadPasswordHash) {
+            uploadPasswordHash = pwdData.uploadPasswordHash;
+        } else if (process.env.UPLOAD_PASSWORD) {
+            // hash env plaintext (do not persist)
+            uploadPasswordHash = bcrypt.hashSync(process.env.UPLOAD_PASSWORD, 10);
+        } else if (typeof pwdData.uploadPassword === 'string' && pwdData.uploadPassword.length > 0) {
+            // legacy plaintext in file — hash it and persist the hash
+            const hashed = bcrypt.hashSync(pwdData.uploadPassword, 10);
+            uploadPasswordHash = hashed;
+            // persist hashed value and remove plaintext (best-effort)
+            try {
+                pwdData.uploadPasswordHash = hashed;
+                delete pwdData.uploadPassword;
+                fs.writeFileSync(passwordPath, JSON.stringify(pwdData, null, 2));
+                console.warn('Plaintext password in password.json was hashed and replaced with uploadPasswordHash.');
+            } catch (werr) {
+                console.warn('Failed to persist hashed password to password.json:', werr.message || werr);
+            }
+        } else {
+            console.warn("Aviso: nenhum password configurado em password.json ou variáveis de ambiente. Use UPLOAD_PASSWORD ou UPLOAD_PASSWORD_HASH.");
+        }
+    } else {
+        // No password file
+        if (process.env.UPLOAD_PASSWORD_HASH) {
+            uploadPasswordHash = process.env.UPLOAD_PASSWORD_HASH;
+        } else if (process.env.UPLOAD_PASSWORD) {
+            uploadPasswordHash = bcrypt.hashSync(process.env.UPLOAD_PASSWORD, 10);
+        } else {
+            console.warn("Aviso: password.json não encontrado e nenhuma variável de senha definida.");
+        }
+    }
 } catch (err) {
-       console.warn("Aviso ao ler password.json:", err.message || err);
+    console.warn("Aviso ao ler password.json:", err.message || err);
 }
 if (!process.env.JWT_SECRET) {
     console.warn("Aviso: JWT_SECRET não definido. Usando valor padrão. Defina a variável de ambiente JWT_SECRET em produção.");
@@ -40,7 +70,8 @@ if (!process.env.JWT_SECRET) {
 // Middleware de autenticação
 const authenticate = (req, res, next) => {
     const password = req.headers['x-upload-password'] || req.body?.password;
-    if (password !== uploadPassword) {
+    if (!uploadPasswordHash) return res.status(500).json({ error: 'Senha do servidor não configurada' });
+    if (!password || !bcrypt.compareSync(password, uploadPasswordHash)) {
         return res.status(401).json({ error: "Senha incorreta" });
     }
     next();
@@ -98,7 +129,7 @@ app.post("/api/login", (req, res) => {
         return res.status(400).json({ error: "Senha é obrigatória" });
     }
 
-    if (password !== uploadPassword) {
+    if (!uploadPasswordHash || !bcrypt.compareSync(password, uploadPasswordHash)) {
         return res.status(401).json({ error: "Senha incorreta" });
     }
 
