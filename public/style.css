@@ -9,8 +9,6 @@ body {
     padding: 20px;
 }
 
-/* Download link styles */
-
 a {
     color: #00aaff;
     text-decoration: none;
@@ -174,6 +172,13 @@ select:hover, button:hover {
 .card-content .download-btn:hover {
     background-color: #333;
     transform: scale(1.05);
+}
+
+.download-count {
+    margin: 4px 0 0 0;
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
 }
 
 .card-top .more-info {
@@ -649,6 +654,7 @@ select:hover, button:hover {
 .social-btn.youtube { background: rgba(255,0,0,0.12); }
 .social-btn.discord { background: rgba(114,137,218,0.08); }
 .social-btn.github { background: rgba(255,255,255,0.04); }
+.social-btn.admin { background: rgba(100,181,246,0.12); }
 
 @media (max-width: 540px) {
     .site-footer { left: 8px; right: 8px; bottom: 8px; }

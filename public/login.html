@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Gerenciador de Texture Packs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            background-image: url('/img/bg.png');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-container {
+            background: #111;
+            border: 2px solid #fff;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #888;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            color: #ddd;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #666;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #00aaff;
+            box-shadow: 0 0 8px #00aaff;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2b7cff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #1a62d6;
+            transform: scale(1.02);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+            font-size: 14px;
+        }
+        .message.success {
+            background: #2d5016;
+            color: #7cff00;
+            border: 1px solid #7cff00;
+        }
+        .message.error {
+            background: #5c1616;
+            color: #ff7070;
+            border: 1px solid #ff7070;
+        }
+        .message.loading {
+            background: #1a3a5c;
+            color: #00aaff;
+            border: 1px solid #00aaff;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #00aaff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .back-link a:hover {
+            color: #00ff00;
+            text-decoration: underline;
+        }
+        .lock-icon {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="lock-icon">🔒</div>
+        <h1>Admin Panel</h1>
+        <p class="subtitle">Gerenciador de Texture Packs</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite a senha do admin" required autocomplete="current-password">
+            </div>
+            <button type="submit">Entrar</button>
+            <div id="message" class="message"></div>
+        </form>
+
+        <div class="back-link">
+            <a href="/">← Voltar ao site</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const messageEl = document.getElementById('message');
+            const passwordInput = document.getElementById('password');
+            const password = passwordInput.value;
+
+            messageEl.style.display = 'block';
+            messageEl.className = 'message loading';
+            messageEl.textContent = '⏳ Autenticando...';
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageEl.className = 'message success';
+                    messageEl.textContent = '✓ Autenticado! Redirecionando...';
+                    
+                    // Salva token no localStorage
+                    localStorage.setItem('adminToken', data.token);
+                    localStorage.setItem('tokenExpiry', new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString());
+                    
+                    // Redireciona para página de adicionar pack
+                    setTimeout(() => window.location.href = '/add-pack.html', 1000);
+                } else {
+                    messageEl.className = 'message error';
+                    messageEl.textContent = `✗ ${data.error}`;
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            } catch (error) {
+                messageEl.className = 'message error';
+                messageEl.textContent = `✗ Erro: ${error.message}`;
+            }
+        });
+
+        // Se já estiver logado, redireciona
+        if (localStorage.getItem('adminToken')) {
+            const expiry = new Date(localStorage.getItem('tokenExpiry'));
+            if (expiry > new Date()) {
+                window.location.href = '/add-pack.html';
+            } else {
+                // Token expirou
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('tokenExpiry');
+            }
+        }
+    </script>
+</body>
+</html>

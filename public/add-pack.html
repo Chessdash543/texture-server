@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adicionar Texture Pack</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            background-image: url('/img/bg.png');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: #111;
+            border: 2px solid #fff;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        h1 {
+            color: #fff;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            color: #ddd;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #666;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #00aaff;
+            box-shadow: 0 0 8px #00aaff;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .required {
+            color: #ff0000;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-submit {
+            background: #2b7cff;
+            color: white;
+        }
+        .btn-submit:hover {
+            background: #1a62d6;
+            transform: scale(1.05);
+        }
+        .btn-cancel {
+            background: #666;
+            color: white;
+        }
+        .btn-cancel:hover {
+            background: #555;
+            transform: scale(1.05);
+        }
+        .btn-logout {
+            background: #8b0000;
+            color: white;
+        }
+        .btn-logout:hover {
+            background: #a00000;
+            transform: scale(1.05);
+        }
+        .message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+        .message.success {
+            background: #2d5016;
+            color: #7cff00;
+            border: 1px solid #7cff00;
+        }
+        .message.error {
+            background: #5c1616;
+            color: #ff7070;
+            border: 1px solid #ff7070;
+        }
+        .resolution-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .resolution-group label {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            width: auto;
+        }
+        .resolution-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        small {
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Adicionar Texture Pack</h1>
+        <form id="addPackForm">
+            <div class="form-group">
+                <label for="id">ID (único) <span class="required">*</span>
+                    <small>Ex: autor.nomepack</small>
+                </label>
+                <input type="text" id="id" name="id" required placeholder="ex: chessdash.diamondtp">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Nome do Pack <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required placeholder="Ex: Diamond TP">
+            </div>
+
+            <div class="form-group">
+                <label for="creator">Criador <span class="required">*</span></label>
+                <input type="text" id="creator" name="creator" required placeholder="Ex: ChessDash543">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <textarea id="description" name="description" placeholder="Descrição do seu texture pack..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="version">Versão</label>
+                <input type="text" id="version" name="version" value="v1.0.0" placeholder="Ex: v1.0.0">
+            </div>
+
+            <div class="form-group">
+                <label>Resoluções <small>(marque uma ou mais)</small></label>
+                <div class="resolution-group">
+                    <label>
+                        <input type="checkbox" name="resolution" value="low"> Low
+                    </label>
+                    <label>
+                        <input type="checkbox" name="resolution" value="medium" checked> Medium
+                    </label>
+                    <label>
+                        <input type="checkbox" name="resolution" value="high"> High
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="download">URL de Download <span class="required">*</span></label>
+                <input type="url" id="download" name="download" required placeholder="Ex: /uploads/seu.pack/arquivo.zip">
+            </div>
+
+            <div class="form-group">
+                <label for="icon">URL do Ícone</label>
+                <input type="url" id="icon" name="icon" placeholder="Ex: /uploads/seu.pack/icon.png">
+            </div>
+
+            <div class="form-group">
+                <label for="screenshot">URL da Captura de Tela</label>
+                <input type="url" id="screenshot" name="screenshot" placeholder="Ex: /uploads/seu.pack/image.png">
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-submit">Adicionar Pack</button>
+                <button type="button" class="btn-cancel" onclick="window.location.href='/'">Voltar</button>
+                <button type="button" class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+
+            <div id="message" class="message"></div>
+        </form>
+    </div>
+
+    <script>
+        // Verifica se está autenticado ao carregar a página
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('adminToken');
+            const expiry = new Date(localStorage.getItem('tokenExpiry'));
+
+            if (!token || expiry < new Date()) {
+                // Não está autenticado ou token expirou
+                window.location.href = '/login.html';
+            }
+        });
+
+        document.getElementById('addPackForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const messageEl = document.getElementById('message');
+            const token = localStorage.getItem('adminToken');
+
+            if (!token) {
+                messageEl.style.display = 'block';
+                messageEl.className = 'message error';
+                messageEl.textContent = '✗ Sessão expirada. Faça login novamente.';
+                setTimeout(() => window.location.href = '/login.html', 2000);
+                return;
+            }
+
+            messageEl.style.display = 'block';
+
+            try {
+                // Coleta resoluções marcadas
+                const resolutions = Array.from(document.querySelectorAll('input[name="resolution"]:checked'))
+                    .map(el => el.value);
+
+                const formData = {
+                    id: document.getElementById('id').value.trim(),
+                    name: document.getElementById('name').value.trim(),
+                    creator: document.getElementById('creator').value.trim(),
+                    description: document.getElementById('description').value.trim(),
+                    version: document.getElementById('version').value.trim(),
+                    resolution: resolutions.length > 0 ? resolutions : ['medium'],
+                    download: document.getElementById('download').value.trim(),
+                    icon: document.getElementById('icon').value.trim(),
+                    screenshot: document.getElementById('screenshot').value.trim()
+                };
+
+                const response = await fetch('/api/packs', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                let data = null;
+                const contentType = response.headers.get('content-type') || '';
+                if (contentType.includes('application/json')) {
+                    try {
+                        data = await response.json();
+                    } catch (err) {
+                        console.error('Failed to parse JSON response:', err);
+                        data = null;
+                    }
+                } else {
+                    const text = await response.text();
+                    console.error('Non-JSON response from /api/packs:', text);
+                }
+
+                if (response.ok) {
+                    messageEl.className = 'message success';
+                    messageEl.textContent = '✓ Texture pack adicionado com sucesso! Redirecionando...';
+                    document.getElementById('addPackForm').reset();
+                    setTimeout(() => window.location.href = '/', 2000);
+                } else {
+                    messageEl.className = 'message error';
+                    messageEl.textContent = `✗ Erro: ${data?.error || response.statusText || 'Erro desconhecido'}`;
+                }
+            } catch (error) {
+                messageEl.className = 'message error';
+                messageEl.textContent = `✗ Erro ao enviar: ${error.message}`;
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('tokenExpiry');
+            window.location.href = '/login.html';
+        }
+
+        function logout() {
+            if (confirm('Tem certeza que deseja fazer logout?')) {
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('tokenExpiry');
+                window.location.href = '/login.html';
+            }
+        }
+    </script>
+</body>
+</html>
