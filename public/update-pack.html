@@ -25,6 +25,7 @@
     }
     h2{margin-bottom:10px;color:#fff;}
     p{color:#bbb;margin-bottom:16px;}
+    .msg {margin-top:12px;color:#ffffff;}
   </style>
 </head>
 <body>
@@ -55,6 +56,11 @@
         </div>
 
         <div class="form-full">
+          <label for="u_version">Version</label>
+          <input id="u_version" name="version" type="text">
+        </div>
+
+        <div class="form-full">
           <label for="u_zipFile">File .zip (optional)</label>
           <input type="file" id="u_zipFile" name="zipFile" accept=".zip">
           <span class="hint">will send to <code>/uploads/{packId}/</code></span>
@@ -76,7 +82,7 @@
       <button type="submit">Salve Changes</button>
     </form>
 
-    <div id="msg" style="margin-top:10px"></div>
+    <div id="msg" style="margin-top:10px; color:#fff; opacity: 0.5;"></div>
   </div>
 
   <script>
@@ -102,6 +108,7 @@
       document.getElementById('u_name').value = pack.name || '';
       document.getElementById('u_creator').value = pack.creator || '';
       document.getElementById('u_description').value = pack.description || '';
+      document.getElementById('u_version').value = pack.version || '';
     }
 
     document.getElementById('selectPack').addEventListener('change', (e)=> loadPack(e.target.value));
@@ -114,7 +121,8 @@
       const payload = {
         name: document.getElementById('u_name').value.trim(),
         creator: document.getElementById('u_creator').value.trim(),
-        description: document.getElementById('u_description').value.trim()
+        description: document.getElementById('u_description').value.trim(),
+        version: document.getElementById('u_version').value.trim()
       };
 
       const zipFile = document.getElementById('u_zipFile');
