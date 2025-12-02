@@ -29,7 +29,7 @@ const restoreStorage = multer.diskStorage({
 // Configurar upload temporário para o backup (usando DISCO, limite de 500MB)
 const tempUpload = multer({
     storage: restoreStorage,
-    limits: { fileSize: 500 * 1024 * 1024 } 
+    limits: { fileSize: 10737418240 } 
 });
 
 const passwordPath = path.join(__dirname, "data", "password.json");
