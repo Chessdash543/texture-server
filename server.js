@@ -306,8 +306,9 @@ app.get('/api/backup', verifyToken, (req, res) => {
         const archive = archiver('zip', { zlib: { level: 9 } });
         archive.on('error', (err) => {
             console.error('Archive error:', err);
-            res.status(500).json({ error: 'Erro ao criar backup' });
+            res.end();
         });
+
 
         archive.pipe(res);
 
