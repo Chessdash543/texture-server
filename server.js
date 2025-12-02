@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const path = require("path");
-const multer = require("multer");
 const jwt = require("jsonwebtoken");
 const archiver = require("archiver");
 const bcrypt = require('bcryptjs');
