@@ -174,7 +174,7 @@
                         <div class="card-content">
                             <h3>${pack.name} by ${pack.creator} - ${pack.version}</h3>
                             <p>${pack.description}</p>
-                            <button class="download-btn" data-id="${pack.id}" data-url="${pack.download}">Download</button>
+                            <button class="download-btn" data-id="${pack.id}" data-url="${pack.download}">Download (${pack.version})</button>
                             <p class="download-count"><small>${pack.downloads || 0} downloads</small></p>
                             <button class="more-info">i
                             </button>
@@ -273,21 +273,45 @@
             // ... (código do openPopup permanece o mesmo, a não ser que você queira ajeitar o link de download para rastrear)
             popupBox.innerHTML = `
                 <div class="popup-top">
+                    <img src="${pack.icon}" alt="Icone do Pack" class="pack-icon"> 
+
                     <div class="popup-info">
-                        <h2>${pack.name}</h2>
-                        <p>Texture Name: ${pack.name}</p>
-                        <p>Creator: ${pack.creator}</p>
-                        <p>Resolution: ${pack.resolution}</p>
-                        <p>Description: ${pack.description}</p>
-                        <p>Version: ${pack.version}</p>
-                        <p>ID: ${pack.id}</p>
-                        <p>Downloads: ${pack.downloads || 0}</p>
-                        <p>Download: <a href="javascript:void(0)" onclick="trackDownload('${pack.id}', '${pack.download}', document.querySelector('.card .download-count small'))">Click here to download</a></p>
-                        <button id="closePopup">Close</button>
+                        <h2 class="title-popp">${pack.name}</h2>
+
+                        <div class="info-details-list">
+                            <p><strong>Criador:</strong> ${pack.creator}</p>
+                            <p><strong>Versão:</strong> ${pack.version}</p>
+                            <p><strong>Resolução:</strong> ${pack.resolution}</p>
+                            <p><strong>Downloads:</strong> ${pack.downloads || 0}</p>
+
+                            <p style="font-size: 12px; color: #777;">ID: ${pack.id}</p>
+                        </div>
+                    
+                        <button 
+                            class="download-btn" 
+                            onclick="trackDownload('${pack.id}', '${pack.download}', document.querySelector('.popup-box .download-count'))">
+                            Download (${pack.version})
+                        </button>
+
                     </div>
                 </div>
-                <img src="${pack.screenshot}" alt="screenshot" class="popup-image">
-            `;
+
+                <div class="popup-bottom-content">
+
+                    <p class="description-block">${pack.description || "Descrição não fornecida."}</p>
+                
+                    <div class="action-links">
+                        <button 
+                            class="details-btn" 
+                            onclick="window.open('pack-detail.html?id=${pack.id}', '_blank')">
+                            Ver Página de Detalhes Completa &rarr;
+                        </button>
+                    </div>
+                </div>
+
+                <img src="${pack.screenshot}" alt="Screenshot" class="popup-image">
+
+                <button id="closePopup" class="closepopup">Close</button>`;
 
             popup.style.display = "flex";
             document.body.classList.add("no-scroll");

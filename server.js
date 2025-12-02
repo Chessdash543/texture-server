@@ -470,6 +470,26 @@ app.post('/api/backup/restore', verifyToken, (req, res) => {
         }
     });
 });
+
+// --- Novo: Ler um único pack por ID ---
+app.get("/api/packs/:id", (req, res) => {
+    try {
+        const packId = req.params.id;
+        const packs = JSON.parse(fs.readFileSync(packsFilePath));
+        
+        const pack = packs.find(p => p.id === packId);
+
+        if (!pack) {
+            return res.status(404).json({ error: "Pack não encontrado" });
+        }
+
+        res.json(pack);
+    } catch (err) {
+        console.error('Error fetching single pack:', err);
+        res.status(500).json({ error: "Erro ao buscar detalhes do pack" });
+    }
+});
+
 // Retorna JSON para rotas /api não encontradas (evita HTML)
 app.use((req, res, next) => {
     if (req.path.startsWith('/api')) {

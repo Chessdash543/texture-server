@@ -135,8 +135,8 @@ select:hover, button:hover {
 }
 
 .card-icon {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
     border-radius: 10px;
     flex-shrink: 0;
@@ -228,7 +228,6 @@ select:hover, button:hover {
     border-radius: 10px;
     object-fit: cover;
     border: 3px solid #ffffff;
-    box-shadow: 0 0 20px #ffffff;
 }
 
 .description-card {
@@ -249,7 +248,7 @@ select:hover, button:hover {
 }
 
 .popup-box {
-    background-color: #111;
+    background-color: #161616;
     color: white;
     padding: 30px;
     border-radius: 15px;
@@ -318,7 +317,6 @@ select:hover, button:hover {
     cursor: pointer;
     transition: transform 0.3s ease;
     border: 3px solid #ffffff;
-    box-shadow: 0 0 20px #ffffff;
 }
 
 .popup-top {
@@ -331,13 +329,11 @@ select:hover, button:hover {
 .popup-info {
     text-align: left;
     flex: 1;
-    border: 2px solid #ffffff;   /* borda do subbloco */
-    box-shadow: 0 0 10px #ffffff88; /* leve brilho */
+    border: 2px solid #ffffff;   /* borda do subbloco */ /* leve brilho */
     gap: 10px;
-    background-color: #1a1a1a; /* fundo do subbloco */
+    background-color: #2b2b2b; /* fundo do subbloco */
     padding: 15px;            /* espaço interno */
     border-radius: 10px; 
-    box-shadow: 0 0 20px #ffffff;
 }
 
 .popup-info p {
@@ -350,8 +346,8 @@ select:hover, button:hover {
 }
 
 .popup-top .pack-icon {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     object-fit: contain;
     border-radius: 10px;
 }
@@ -676,4 +672,47 @@ select:hover, button:hover {
     object-fit: contain;
     border-radius: 10px;
     filter: drop-shadow(0 0 12px #ffffffc5);
+}
+
+.popup-bottom-content .description-block {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(43, 43, 43, 0.76);
+    border-left: 5px solid #00aaff;
+    border-radius: 4px;
+    color: #ccc;
+}
+
+.popup-top .title-popp {
+    text-align: center;
+}
+
+.popup-top .popup-info .info-details-list p {
+    font-size: 20px;
+    margin: 6px 0;
+}
+
+.popup-top .popup-info .download-btn {
+    color: white;
+    background-color: #006eff;
+}
+
+.popup-bottom-content .action-links .details-btn {
+    padding: 10px 18px;
+    font-size: 18px;
+    border-radius: 25px;
+    background-color: #646464;
+    color: #fff;
+}
+
+.popup-box.closepopup {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 12px;
+    background-color: #7e7e7e;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    animation: popupFade .2s ease-in-out;
 }
