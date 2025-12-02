@@ -103,19 +103,22 @@ if (!fs.existsSync(uploadsDir)) {
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const packId = req.body.packId || req.query.packId;
-        const packDir = path.join(uploadsDir, packId);
-        if (!fs.existsSync(packDir)) {
-            fs.mkdirSync(packDir, { recursive: true });
-        }
-        cb(null, packDir);
+        const packId = req.body.packId;
+        if (!packId) return cb(new Error('packId não fornecido'));
+
+        const dir = path.join(__dirname, 'public', 'uploads', packId);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        cb(null, dir);
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, Date.now() + '-' + file.originalname);
     }
 });
 
-const upload = multer({ storage, limits: { fileSize: 100 * 1024 * 1024 } });
+const upload = multer({
+    storage,
+    limits: { fileSize: 500 * 1024 * 1024 } // 500MB
+});
 
 // Rota admin
 app.get("/admin.html", (req, res) => {
@@ -271,27 +274,38 @@ app.delete('/api/packs/:id', verifyToken, (req, res) => {
 });
 
 // Upload de arquivos (ZIP, ícone, screenshot)
-app.post("/api/upload", verifyToken, upload.fields([
-    { name: 'zipFile', maxCount: 1 },
-    { name: 'icon', maxCount: 1 },
-    { name: 'screenshot', maxCount: 1 }
-]), (req, res) => {
-    try {
-        const { packId } = req.body;
-        if (!packId) {
-            return res.status(400).json({ error: "packId é obrigatório" });
+app.post('/api/upload', verifyToken, (req, res) => {
+    // 1. Envolver o middleware do multer para capturar erros específicos dele
+    upload.fields([
+        { name: 'zipFile', maxCount: 1 },
+        { name: 'icon', maxCount: 1 },
+        { name: 'screenshot', maxCount: 1 }
+    ])(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            // Erros do multer (ex: tamanho de arquivo excedido, número de arquivos)
+            return res.status(400).json({ error: 'Erro no upload: ' + err.message });
+        } else if (err) {
+            // Outros erros (ex: packId não fornecido na função de destino)
+            console.error('Upload error (Multer):', err);
+            return res.status(500).json({ error: 'Erro ao fazer upload: ' + (err.message || 'Erro desconhecido') });
         }
 
-        const uploads = {};
-        if (req.files?.zipFile?.[0]) uploads.zip = `/uploads/${packId}/${req.files.zipFile[0].filename}`;
-        if (req.files?.icon?.[0]) uploads.icon = `/uploads/${packId}/${req.files.icon[0].filename}`;
-        if (req.files?.screenshot?.[0]) uploads.screenshot = `/uploads/${packId}/${req.files.screenshot[0].filename}`;
+        // 2. Sua lógica de sucesso original, que agora está dentro do callback
+        try {
+            const packId = req.body.packId;
+            if (!packId) return res.status(400).json({ error: 'packId é obrigatório' });
 
-        res.json({ success: true, uploads });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Erro ao fazer upload" });
-    }
+            const uploads = {};
+            if (req.files?.zipFile?.[0]) uploads.zip = `/uploads/${packId}/${req.files.zipFile[0].filename}`;
+            if (req.files?.icon?.[0]) uploads.icon = `/uploads/${packId}/${req.files.icon[0].filename}`;
+            if (req.files?.screenshot?.[0]) uploads.screenshot = `/uploads/${packId}/${req.files.screenshot[0].filename}`;
+
+            res.json({ success: true, uploads });
+        } catch (internalErr) {
+            console.error('Upload error (Internal Logic):', internalErr);
+            res.status(500).json({ error: 'Erro interno ao processar upload: ' + internalErr.message });
+        }
+    });
 });
 
 // GET /api/backup - download backup compactado (data.json + uploads)

@@ -499,6 +499,7 @@ select:hover, button:hover {
     justify-content: center;
     gap: 8px;
     margin: 20px;
+    margin-bottom: 100px;
 }
 
 #pagination button {
@@ -509,6 +510,7 @@ select:hover, button:hover {
     border: 1px solid #444;
     cursor: pointer;
     font-size: 18px;
+    box-shadow: 0 0 8px #ffffff;
 }
 
 #pagination button:hover:not(.active-page) {
@@ -516,16 +518,15 @@ select:hover, button:hover {
 }
 
 #pagination .active-page {
-    background: #f39c12;
+    background: #006eff;
     font-weight: bold;
+    
 }
-
 .no-scroll {
     overflow: hidden;
     height: 100vh;
 }
 
-/* Additional responsive tweaks to make menus and buttons larger on mobile */
 @media (max-width: 900px) {
     .top-bar {
         flex-direction: column;
@@ -645,7 +646,7 @@ select:hover, button:hover {
     border-radius: 8px;
     padding: 8px 10px;
     transition: transform .12s ease, background-color .12s ease;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .social-btn svg { display: block; }
