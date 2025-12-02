@@ -153,6 +153,7 @@ select:hover, button:hover {
     border-radius: 10px;      /* bordas arredondadas */
     border: 2px solid #ffffff;   /* borda do subbloco */
     box-shadow: 0 0 10px #ffffff88; /* leve brilho */
+    position: relative;
 }
 
 .card-content .download-btn {
@@ -183,10 +184,10 @@ select:hover, button:hover {
     text-align: center;
 }
 
-.card-top .more-info {
+.card-content .more-info {
     position: absolute;
-    top: 15px;               /* distância do topo */
-    right: 15px;             /* distância da direita */
+    top: 15px;
+    right: 15px;
     
     width: 35px;
     height: 35px;
@@ -205,19 +206,19 @@ select:hover, button:hover {
     font-size: 20px;
     font-weight: bold;
 
-    overflow: hidden;        /* importante para imagem circular */
+    overflow: hidden;
     z-index: 10;
 }
 
-.card-top .more-info img {
+.card-content .more-info img {
     width: 70%;
     height: 70%;
     object-fit: contain;
-    pointer-events: none;    /* evita clique na imagem ao invés do botão */
+    pointer-events: none;
 }
 
 
-.card-top .more-info:hover {
+.card-content .more-info:hover {
     background-color: #333;
 }
 
@@ -563,7 +564,7 @@ select:hover, button:hover {
         font-size: 18px;
     }
 
-    .more-info {
+    .card-content .more-info {
         width: 40px;
         height: 40px;
         font-size: 18px;
