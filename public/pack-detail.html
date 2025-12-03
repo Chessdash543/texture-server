@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="packTitle">Carregando Texture Pack...</title>
+    <title id="packTitle"> Texture Pack...</title>
     <link rel="icon" href="/img/icon.png" type="image/x-icon">
     <style>
         /* Base Reset */
@@ -189,10 +189,10 @@
             async function trackDownload(packId, downloadUrl, countElement) {
                 // Seleciona o botão dentro do cabeçalho de detalhes para manipulação
                 const dlBtn = document.getElementById("detailDownloadBtn");
-                
+
                 if (dlBtn) {
                     dlBtn.disabled = true;
-                    dlBtn.textContent = 'Baixando...';
+                    dlBtn.textContent = 'Downloading...';
                 }
             
                 try {
@@ -203,12 +203,12 @@
                             'Content-Type': 'application/json'
                         }
                     });
-                    
+
                     const data = await response.json();
                 
                     if (response.ok && data.success) {
                         console.log(`Download rastreado com sucesso. Novo total: ${data.downloads}`);
-                        
+
                         // 2. ATUALIZA A CONTAGEM no frontend
                         if (countElement) {
                             countElement.textContent = data.downloads;
@@ -223,7 +223,7 @@
                 } finally {
                     // 3. INICIA O DOWNLOAD (mesmo que o rastreamento tenha falhado)
                     window.location.href = downloadUrl;
-                    
+
                     // Reativa o botão (opcional, pode ser redundante se a página for recarregada)
                     if (dlBtn) {
                         dlBtn.disabled = false;
@@ -245,31 +245,31 @@
                 const loadingStatus = document.getElementById('loading-status');
             
                 // Garante que o status de carregamento apareça enquanto buscamos os dados
-                container.innerHTML = `<h2 id="loading-status">Carregando detalhes do pacote...</h2>`;
+                container.innerHTML = `<h2 id="loading-status">Loading Details of pack...</h2>`;
             
                 try {
                     // Chama a rota de back-end para buscar os dados do pacote
                     const response = await fetch(`/api/packs/${id}`); 
                 
                     if (!response.ok) {
-                        loadingStatus.textContent = "Pack não encontrado (Erro 404).";
+                        loadingStatus.textContent = "Pack not fond (Erro 404).";
                         return;
                     }
                 
                     const pack = await response.json();
                 
                     // Atualiza o Título da Página
-                    document.getElementById('packTitle').textContent = `${pack.name} por ${pack.creator}`;
-                    
+                    document.getElementById('packTitle').textContent = `${pack.name} by ${pack.creator}`;
+
                     // 2. Cria o conteúdo HTML (com ID de contagem e data-version no botão)
                     container.innerHTML = `
                         <div class="detail-header">
                             <img src="${pack.icon}" alt="Icon" class="pack-icon-large">
                             <div class="detail-info">
                                 <h1>${pack.name}</h1>
-                                <p><strong>Criador:</strong> ${pack.creator}</p>
-                                <p><strong>Resolução:</strong> ${pack.resolution}</p>
-                                <p><strong>Versão:</strong> ${pack.version}</p>
+                                <p><strong>Creator:</strong> ${pack.creator}</p>
+                                <p><strong>Resoltion:</strong> ${pack.resolution}</p>
+                                <p><strong>Version:</strong> ${pack.version}</p>
                                 <p><strong>Downloads:</strong> <span id="detail-downloads">${pack.downloads || 0}</span></p>
                                 <p><strong>ID:</strong> ${pack.id}</p>
                                 <p class="description">${pack.description || "Nenhuma descrição fornecida."}</p>
@@ -288,19 +288,19 @@
                             <img src="${pack.screenshot}" alt="Screenshot principal" class="pack-screenshot-large">
                         </div>
                     `;
-                        
+
                     // 3. Adicionar Listener de Download e Rastreamento (após o innerHTML)
                     const dlBtn = document.getElementById("detailDownloadBtn");
                     const countEl = document.getElementById("detail-downloads");
-                        
+
                     if (dlBtn && countEl) {
                         // Passa o ID, URL do arquivo e o elemento para atualização
                         dlBtn.addEventListener("click", () => trackDownload(pack.id, pack.download, countEl));
                     }
                 
                 } catch (error) {
-                    console.error('Erro ao carregar pack:', error);
-                    container.innerHTML = `<h2 style="color: red;">Não foi possível carregar o pack. Verifique sua conexão ou tente mais tarde.</h2>`;
+                    console.error('Error to loading tp:', error);
+                    container.innerHTML = `<h2 style="color: red;">Is not possible loading the pack </h2>`;
                 }
             }
         </script>
