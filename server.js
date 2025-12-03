@@ -513,8 +513,4 @@ app.use((err, req, res, next) => {
     res.status(500).send('Erro interno no servidor');
 });
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
-
 module.exports = app;
