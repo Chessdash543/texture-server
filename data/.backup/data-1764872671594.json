@@ -59,7 +59,7 @@
     "version": "v1.1.2",
     "icon": "/uploads/yoichi.onlyyoichigdtexturepack/icon.png",
     "screenshot": "/uploads/yoichi.onlyyoichigdtexturepack/image.png",
-    "downloads": 1
+    "downloads": 0
   },
   {
     "id": "elbrift.better-df",
@@ -122,65 +122,5 @@
     "icon": "/uploads/maustyles.srguillestertp/1764705782693-mtPE3TsA.png",
     "screenshot": "/uploads/maustyles.srguillestertp/1764705782708-78_sin_titulo_20251202015734.png",
     "downloads": 0
-  },
-  {
-    "id": "DANZGAME.cirindo",
-    "name": "Cirindo",
-    "creator": "DANZGAME",
-    "description": "Cirindo (Circuit Indonesia) is a texture pack from the Circuit board line. Special Thanks To DeepResonanceX And ChessDash543 For To Help In Creating a Texture Packs",
-    "version": "v1.3.0",
-    "resolution": [
-      "low",
-      "medium"
-    ],
-    "download": "/uploads/DANZGAME.cirindo/1764796603838-Cirindo.zip",
-    "icon": "/uploads/DANZGAME.cirindo/1764796607046-20250211_133200.png",
-    "screenshot": "/uploads/DANZGAME.cirindo/1764796607047-20251114_035005.png",
-    "downloads": 0
-  },
-  {
-    "id": "pvn6.processorpack",
-    "name": "Processor Pack",
-    "creator": "Processor",
-    "description": "Black and Purple themed mashup of some of my favorite texture packs together (Credits: Futura UI, SSOH, Soluble, Zeronium, Blueskii)",
-    "version": "v1.0.0",
-    "resolution": [
-      "medium",
-      "high"
-    ],
-    "download": "/uploads/pvn6.processorpack/1764798795062-Processor Pack (OFFICIAL RELEASE).zip",
-    "icon": "/uploads/pvn6.processorpack/1764798799643-pack-3.png",
-    "screenshot": "/uploads/pvn6.processorpack/1764798799644-7RFqWs_HJ0U-HD_1.jpg",
-    "downloads": 0
-  },
-  {
-    "id": "asky74.clean",
-    "name": "GD Clean",
-    "creator": "Asky74",
-    "description": "GD Clean is a minimalist, dark-themed, monochromatic texture pack with simple icons from tabler-icons.io. \nIt is intuitive and, most importantly, easy on the eyes.",
-    "version": "v2.1.2",
-    "resolution": [
-      "medium",
-      "high"
-    ],
-    "download": "/uploads/asky74.clean/1764799607308-GDClean2.1.2.zip",
-    "icon": "/uploads/asky74.clean/1764799608547-pack-2.png",
-    "screenshot": "/uploads/asky74.clean/1764799608548-86 sin tÃ­tulo_20251203175319.png",
-    "downloads": 0
-  },
-  {
-    "id": "FREAKINGDAN.DeterminationfontPack",
-    "name": "Determination font Pack",
-    "creator": "FREAKINGDAN",
-    "description": "This simple texture pack (or should i say font pack) changes the bigFont, goldFont and chatFont to the iconic font used in the game called Undertale.\n\nBig shoutout to Toby Fox for making this iconic game and this iconic font for use.",
-    "version": "v1.2.0",
-    "resolution": [
-      "medium",
-      "high"
-    ],
-    "download": "/uploads/FREAKINGDAN.DeterminationfontPack/1764872876838-DFPNew.zip",
-    "icon": "/uploads/FREAKINGDAN.DeterminationfontPack/1764872876842-pack.png",
-    "screenshot": "/uploads/FREAKINGDAN.DeterminationfontPack/1764872876843-Determination_Thumbnail_20251204_112254_0000.png",
-    "downloads": 1
   }
 ]
